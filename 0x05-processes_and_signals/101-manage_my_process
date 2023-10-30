@@ -1,0 +1,18 @@
+#!/usr/bin/env
+# Bash (init) script that manages manage_my_process
+case "$1" in
+    start)
+        /bin/bash /path/to/manage_my_process.sh start
+        ;;
+    stop)
+        /bin/bash /path/to/manage_my_process.sh stop
+        ;;
+    restart)
+        /bin/bash /path/to/manage_my_process.sh restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit 0
