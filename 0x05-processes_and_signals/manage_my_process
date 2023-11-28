@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Bash script that write I am alive! to the file /tmp/my_process
+if [ "$1" == "start" ]; then
+    if [ -f "/var/run/my_process.pid" ]; then
+        echo "manage_my_process already started"
+    else
+        /bin/bash /path/to/manage_my_process.sh &
+        echo $! > /var/run/my_process.pid
+        echo "manage_my_process started"
+    fi
+elif [ "$1" == "stop" ]; then
+    if [ -f "/var/run/my_process.pid" ]; then
+        kill "$(cat /var/run/my_process.pid)"
+        rm /var/run/my_process.pid
+        echo "manage_my_process stopped"
+    else
+        echo "manage_my_process is not running"
+    fi
+elif [ "$1" == "restart" ]; then
+    if [ -f "/var/run/my_process.pid" ]; then
+        kill "$(cat /var/run/my_process.pid)"
+        rm /var/run/my_process.pid
+    fi
+    /bin/bash /path/to/manage_my_process.sh &
+    echo $! > /var/run/my_process.pid
+    echo "manage_my_process restarted"
+else
+    echo "Usage: manage_my_process {start|stop|restart}"
+fi
