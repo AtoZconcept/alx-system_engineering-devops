@@ -1,5 +1,11 @@
 # 0x06-regular_expressions
 
+## Background Context
+* For this project, i build my  regular expression using Oniguruma, a regular expression library that which is used by Ruby by default. Note that other regular expression libraries sometimes have different properties.
+* Because the focus of this exercise is to play with regular expressions (regex), here is the Ruby code that you should use
+::: #!/usr/bin/env ruby
+    puts ARGV[0].scan(/regex here/).join
+
 ## Requirements
 * Allowed editors: vi, vim, emacs
 * All your files will be interpreted on Ubuntu 20.04 LTS
