@@ -3,10 +3,10 @@ file { '/root/.ssh/config':
   ensure => present,
   mode   => '0600',
   content => "\
-  Host advanced-task
+Host advanced-task
     Hostname 54.146.79.250
-	User ubuntu
-	IdentityFile ~/.ssh/school
-	PasswordAuthentication no
+    User ubuntu
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
 ",
 }
