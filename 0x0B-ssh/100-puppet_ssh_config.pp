@@ -1,5 +1,5 @@
 # puppet file to to change ssh/config file
-file { '~/.ssh/config':
+file { '/root/.ssh/config':
   ensure => present,
   mode   => '0600',
   content => "\
