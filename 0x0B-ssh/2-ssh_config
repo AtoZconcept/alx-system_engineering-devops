@@ -1,0 +1,6 @@
+Host task-2
+    Hostname 54.146.79.250
+	User ubuntu
+	IdentityFile ~/.ssh/school
+	PasswordAuthentication no
+	
