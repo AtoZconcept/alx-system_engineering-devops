@@ -2,7 +2,7 @@
 # script that Install nginx web server
 sudo apt-get update
 sudo apt-get -y install nginx
-# what about this command
+# what about below command to connect port 80
 # sudo sed -i 's/\blisten 80\b/listen 80 default_server/' /etc/nginx/sites-available/default
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
