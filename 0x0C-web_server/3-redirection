@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# script that create redirect_me
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo sed -i 's/\blisten 80\b/listen 80 default_server/' /etc/nginx/sites-available/default
+echo -e "location /redirect_me {\n    return 301 https://github.com/AtoZconcept;\n}" | sudo tee -a /etc/nginx/sites-available/default
+sudo service nginx restart
