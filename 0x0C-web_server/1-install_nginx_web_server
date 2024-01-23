@@ -2,10 +2,9 @@
 # script that Install nginx web server
 sudo apt-get update
 sudo apt-get -y install nginx
-# command to listen from port 80
-# sudo ufw allow 'Nginx HTTP'
 # what about this command
-sudo sed -i 's/\blisten 80\b/listen 80 default_server/' /etc/nginx/sites-available/default
+# sudo sed -i 's/\blisten 80\b/listen 80 default_server/' /etc/nginx/sites-available/default
 echo "Hello World!" | sudo tee /var/www/html/index.html
+sudo ufw allow 'Nginx HTTP'
 sudo nginx -t
 sudo service nginx restart
