@@ -2,6 +2,9 @@
 # script that create redirect_me
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo sed -i 's/\blisten 80\b/listen 80 default_server/' /etc/nginx/sites-available/default
-echo -e "location /redirect_me {\n    return 301 https://github.com/AtoZconcept;\n}" | sudo tee -a /etc/nginx/sites-available/default
+echo "Hello World!" | sudo tee /var/www/html/index.html
+new_str="server_name _;\n\trewrite ^\/redirect_me https:\/\/www.github.com\/amasin76 permanent;"
+sudo sed -i "s/server_name _;/$new_str/" /etc/nginx/sites-enabled/default
+
+sudo nginx -t
 sudo service nginx restart
