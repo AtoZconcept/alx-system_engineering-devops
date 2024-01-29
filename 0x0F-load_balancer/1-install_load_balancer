@@ -3,17 +3,32 @@
 apt-get -y update
 apt-get -y install haproxy
 
-sudo sed -i "9i ENABLED=1" /etc/default/haproxy
+sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOT
+global
+    daemon
+    maxconn 256
 
-echo '
-frontend itri.tech
-	bind *:80
-	default_backend web_servers
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
 
-backend web_servers
-	balance roundrobin
-	server 427525-web-01 100.26.167.191 check
-	server 427525-web-02 54.173.241.59 check
-' >> /etc/haproxy/haproxy.cfg
+frontend http_front
+    bind *:80
+    default_backend http_back
 
-service haproxy restart
+backend http_back
+    balance roundrobin
+    server web-01 100.26.225.174:80 check
+    server web-02 18.209.224.170:80 check
+EOT
+
+# Test HAProxy configuration
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Start HAProxy
+sudo systemctl start haproxy
+
+# Enable HAProxy to start on boot
+sudo systemctl enable haproxy
