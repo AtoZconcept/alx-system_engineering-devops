@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # install and configure HAproxy on lb-01 server.
-apt-get -y update
-apt-get -y install haproxy
+sudo apt -y update
+sudo apt -y install haproxy
 
+sudo sed -i "11i ENABLED=1" /etc/default/haproxy
 sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOT
 global
     daemon
@@ -25,5 +26,4 @@ backend http_back
 EOT
 
 sudo haproxy -c -f /etc/haproxy/haproxy.cfg
-sudo systemctl start haproxy
-sudo systemctl enable haproxy
+sudo service haproxy restart
