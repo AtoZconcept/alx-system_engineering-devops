@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Bash script that will display information about subdomains.
+display_info() {
+    local domain=$1
+    local subdomain=$2
+
+	# command to get the IP address of the subdomain
+    ip=$(dig +short ${subdomain}.${domain})
+
+    # Display the information
+    echo "The subdomain ${subdomain} is a A record and points to ${ip}"
+}
+
+if [ $# -eq 2 ]; then
+    display_info $1 $2
+else
+	# Default subdomains to check
+    subdomains=("www" "lb-01" "web-01" "web-02")
+
+	for subdomain in "${subdomains[@]}"; do
+        display_info $1 $subdomain
+    done
+fi
