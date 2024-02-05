@@ -1,0 +1,28 @@
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+
+# Default SSL material locations
+ca-base /etc/ssl/certs
+crt-base /etc/ssl/private
+
+# See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
+ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
+ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+frontend www
+    bind *:80
+    bind *:443 ssl crt /etc/haproxy/certs/mycert.pem
+    http-request redirect scheme https unless { ssl_fc }
+    default_backend http_back
+
+backend http_back
+    balance roundrobin
+	server web-01 100.26.167.191:80 check
+    server web-02 54.173.241.59:80 check
