@@ -20,5 +20,5 @@ if __name__ == "__main__":
                             quoting=csv.QUOTE_ALL, lineterminator='\n')
         for task in todos:
             if task.get('userId') == int(user_id):
-                writer.writerow([user_id, user.get('name'),
+                writer.writerow([user_id, user.get('username'),
                                  task.get('completed'), task.get('title')])
