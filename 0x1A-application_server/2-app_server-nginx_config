@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name default_server;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/ubuntu/AirBnB_clone_v2/web_flask/web_flask.sock;
+    }
+    listen [::]:5000 default_server;
+}
